@@ -1,0 +1,21 @@
+flowchart LR
+  subgraph Edge
+    web["Web App"]
+    mobile["Mobile App"]
+  end
+  subgraph Core["Core Services"]
+    gw["API Gateway"]
+    check{"Token valid?"}
+    auth["Auth Service"]
+    db[("Postgres")]
+  end
+
+  web --> gw
+  mobile --> gw
+  gw --> check
+  check -- "yes" --> auth
+  check -- "no" --> gw
+  gw -->|"retry"| gw
+  auth --> db
+
+  legacy["Legacy note"]

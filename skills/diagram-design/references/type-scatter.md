@@ -2,6 +2,8 @@
 
 **Best for:** correlation and distribution — two continuous variables plotted against each other. Use when the relationship (or lack of one) between variables is the message, or when you need to identify clusters, outliers, and high/low performers.
 
+> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` is the only shipped verifier.
+
 ## Layout conventions
 
 - **Plot area margins:** left 80px, bottom 60px, top 40px, right 40px — inside `0 0 1000 500` viewBox.
@@ -29,7 +31,7 @@
 - More than 30 points without clustering (jitter/mush) — when the crowd itself is the story, hand it to the **beeswarm variant** below, which packs instead of jittering.
 - Forced trend line when the data is genuinely scattered — dishonest.
 - Point labels on every point (label the focal and 1–2 notable outliers only).
-- Ad-hoc bubble size encoding on a plain scatter. Size perception is unreliable enough that it earns its own contract: when the third value genuinely matters, use the **bubble variant** below, which pins area to the value and gates it with `scripts/verify-bubble.py`; when it doesn't, a third axis label or a focal choice says it cheaper.
+- Ad-hoc bubble size encoding on a plain scatter. Size perception is unreliable enough that it earns its own contract: when the third value genuinely matters, use the **bubble variant** below, which pins area to the value and gates it with `verify-bubble.py`; when it doesn't, a third axis label or a focal choice says it cheaper.
 - Axes that don't include zero when the absolute position matters; axes that do include zero when the range is tiny and far from zero.
 
 ### Bubble
@@ -59,7 +61,7 @@ Not for: a third value that is really a category (use the focal accent or facet 
 
 #### Honest-data rule
 
-**Area encodes the third value — never radius.** Radius-proportional sizing squares the claim: a 6× value reads as 36× the ink. `scripts/verify-bubble.py` gates it, along with the two axis scales.
+**Area encodes the third value — never radius.** Radius-proportional sizing squares the claim: a 6× value reads as 36× the ink. `verify-bubble.py` gates it, along with the two axis scales.
 
 - **One linear scale per axis, every bubble on it.** A bubble nudged aside because two crowd each other reads as a different number; crowded bubbles are data, and the honest fixes are a hairline of separation (which the largest-first rule provides) or fewer items — never a moved centre.
 - **Axes include zero, or the source line states the bounds.** A bubble's position is read against the origin in a way a slopegraph's is not. No log scale without saying so — and area next to a log axis is a reading most audiences get wrong, so prefer not at all.
@@ -96,7 +98,7 @@ What each binding buys, and what it costs to omit:
 | `data-name` on a label | Two labels could be exchanged between bubbles, renaming both, with every number still correct in isolation. |
 | `data-tick` / `data-value` on a tick | The printed axis could be relabelled wholesale — every bubble honestly placed on a scale the axis lies about. |
 
-`scripts/verify-bubble.py` derives both axis scales and the area constant from the set itself (Theil–Sen, leave-one-out, so one dishonest bubble cannot drag the line it is measured against), requires at most one accent bubble, checks paint order on overlaps, and holds every bound label and tick against the mark it describes. Deliberately **not** `data-series`: that attribute is the slopegraph contract, and using it here would put every bubble file inside `verify-slopegraph.py`'s scope.
+`verify-bubble.py` derives both axis scales and the area constant from the set itself (Theil–Sen, leave-one-out, so one dishonest bubble cannot drag the line it is measured against), requires at most one accent bubble, checks paint order on overlaps, and holds every bound label and tick against the mark it describes. Deliberately **not** `data-series`: that attribute is the slopegraph contract, and using it here would put every bubble file inside `verify-slopegraph.py`'s scope.
 
 **No `transform` on any of it.** The checker reads raw `cx`/`cy`/`r` and `x`/`y` attributes, so a transform on a bubble, a bound label, an ancestor `<g>`, or in a CSS rule moves the rendered mark away from the number that was verified. Bake the offset into the coordinates. The rotated value-axis caption is fine — it is neither verified geometry nor a bound label.
 
@@ -120,7 +122,7 @@ Not for: two variables (that is the parent scatter); comparing distributions acr
 #### Layout conventions
 
 - **One value axis, horizontal, at the parent's baseline** (`y=420` inside `0 0 1000 500`, plot margins left 80, right 40), with 4–6 bound ticks at equal intervals in Geist Mono 8px and **vertical gridlines only** — the swarm axis has no scale to grid, and a horizontal rule through the band would invite reading the packing offsets as values.
-- **Dot count: 20–300**, one dot per item, all at one radius (the shipped example uses `r=4`). Both ends of the budget are enforced by `scripts/verify-beeswarm.py`.
+- **Dot count: 20–300**, one dot per item, all at one radius (the shipped example uses `r=4`). Both ends of the budget are enforced by `verify-beeswarm.py`.
 - **Greedy dodge around a midline** (`y=230` in the shipped example): each dot takes the first free slot alternating above/below at a fixed pitch of `2r+2`. The dodge is packing, not data — any collision-free arrangement is legitimate, and the algorithm is not part of the contract.
 - **Labels: the focal dot plus the outliers a reader will look for, at most 6.** Geist Mono 8px small-caps on a paper mask, one tier per label, alternating sides of the band, each tied to its dot by an unbound hairline leader and bound to it with `data-name`.
 - **4px grid** applies to the designed constants — the axis rule, gridlines, tick baselines, legend rows. Dot positions are data-scaled on the value axis and packing-scaled on the swarm axis, and both are exempt; snapping them would move the data.
@@ -133,7 +135,7 @@ Not for: two variables (that is the parent scatter); comparing distributions acr
 
 #### Honest-data rule
 
-**The value axis is exact and shared; the swarm axis carries no meaning — and says so.** The legend or source line states that the vertical spread is packing, states the axis bounds, and counts anything omitted. `scripts/verify-beeswarm.py` gates the geometry half.
+**The value axis is exact and shared; the swarm axis carries no meaning — and says so.** The legend or source line states that the vertical spread is packing, states the axis bounds, and counts anything omitted. `verify-beeswarm.py` gates the geometry half.
 
 - **No dot is dropped, binned, or jittered off its true value.** One dot = one item at exactly its value on one linear scale derived from the set itself (Theil-Sen, leave-one-out, so one dishonest dot cannot drag the line it is measured against).
 - **Overlap is resolved by the perpendicular dodge, never by moving a dot along the value axis.** Two items with one value share a position and dodge apart; crowding is data, and the honest rendering of a crowd is thickness.
@@ -168,7 +170,7 @@ What each binding buys, and what it costs to omit:
 | `data-name` on a label | The label floats free — it could name a dot that is not there, or drift to a neighbour. |
 | `data-tick` / `data-value` on a tick | The printed axis could be relabelled wholesale — every dot honestly placed on a scale the axis lies about. |
 
-`scripts/verify-beeswarm.py` derives the value scale from the dots themselves, requires dots sharing a value to share a position, refuses any overprinted pair, holds every dot to one radius and every non-focal dot to one fill, caps the accent at one dot and the labels at six, requires every `data-name` to be non-empty and unique, and checks every bound label and tick against the mark it describes; `scripts/test-verify-beeswarm.py` proves each check in both polarities and pins the sibling scope treaty in both directions.
+`verify-beeswarm.py` derives the value scale from the dots themselves, requires dots sharing a value to share a position, refuses any overprinted pair, holds every dot to one radius and every non-focal dot to one fill, caps the accent at one dot and the labels at six, requires every `data-name` to be non-empty and unique, and checks every bound label and tick against the mark it describes; `test-verify-beeswarm.py` proves each check in both polarities and pins the sibling scope treaty in both directions.
 
 **Nothing may position a mark except its own attributes.** The checker reads raw `cx`/`cy`/`r` and `x`/`y`, so anything applied afterwards invalidates the check that passed. Every carrier is refused — the `transform` attribute, an inline `style="…"`, and a rule in a `<style>` block — on a dot, on a bound label or tick, or on an ancestor `<g>`/`<svg>`. So is every positioning property, not just `transform`: the Level 2 individual properties `translate`/`rotate`/`scale`, the SVG geometry properties `cx`/`cy`/`r`/`x`/`y` (CSS beats the presentation attribute), and CSS motion path. Bake the offset into the coordinates. `line-height`, `color` and font declarations are untouched — they do not move anything.
 

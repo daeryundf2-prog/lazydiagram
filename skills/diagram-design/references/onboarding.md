@@ -131,15 +131,15 @@ If any check fails, propose an adjusted value and explain why.
 Show the user what will change in `style-guide.md`. Only the tokens table — everything else stays the same.
 
 ```diff
--| `paper`  | `#f5f4ed` | `#1c1a17` |
--| `ink`    | `#0b0d0b` | `#f1efe7` |
--| `accent` | `#f7591f` | `#ff6a30` |
+-| `paper`  | `#f5f5f5` | `#2d3142` |
+-| `ink`    | `#2d3142` | `#f5f5f5` |
+-| `accent` | `#eb6c36` | `#f08a59` |
 +| `paper`  | `#f8f6f0` | `#1a1815` |
 +| `ink`    | `#111111` | `#efeee7` |
 +| `accent` | `#c73a2b` | `#e05440` |
 ```
 
-Also regenerate the dark variant via the inversion rule (`rgba(11,13,11, X)` → `rgba(ink-rgb, X)`).
+Also regenerate the dark variant via the inversion rule (`rgba(45,49,66, X)` → `rgba(ink-rgb, X)`).
 
 Include a compact **brand fidelity receipt** with the preview:
 

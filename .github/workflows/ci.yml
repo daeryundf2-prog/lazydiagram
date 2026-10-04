@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Python scripts
+        run: |
+          python3 -m py_compile \
+            skills/diagram-design/scripts/self_check.py \
+            skills/diagram-design/scripts/drawio_extract.py \
+            skills/diagram-design/scripts/mermaid_extract.py
+
+      - name: Self-check shipped example diagrams
+        run: |
+          python3 skills/diagram-design/scripts/self_check.py \
+            skills/diagram-design/assets/example-architecture.html \
+            skills/diagram-design/assets/example-flowchart.html \
+            skills/diagram-design/assets/example-import-mermaid.html
+
+      - name: Extract fixtures
+        run: |
+          python3 skills/diagram-design/scripts/mermaid_extract.py \
+            skills/diagram-design/scripts/fixtures/sample-flowchart.mmd
+          python3 skills/diagram-design/scripts/drawio_extract.py \
+            skills/diagram-design/scripts/fixtures/sample-architecture.drawio
+
+      - name: Node tests
+        run: npm test

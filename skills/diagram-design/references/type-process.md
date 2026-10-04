@@ -388,9 +388,9 @@ Above 6 lanes or 12 steps: split into two diagrams (overview + detail).
 
 ---
 
-## 12. Worked example — full YAML for `example-process-extended.html`
+## 12. Worked example — full YAML for an extended variant
 
-The extended example diagram is fully described by the following inputs. Every coordinate in the rendered SVG is derivable from this block via §2 + §3 + §4. This is the canonical proof that the parametric contract works end-to-end.
+An extended variant of the process diagram is fully described by the following inputs; no HTML file for it ships in this distribution. Every coordinate in a rendered SVG is derivable from this block via §2 + §3 + §4. This is the canonical proof that the parametric contract works end-to-end.
 
 ```yaml
 # Quarterly survey — end-to-end workflow (extended variant)
@@ -461,15 +461,13 @@ dark: false
 Run §2 of this reference with these inputs:
 
 - `n_lanes = 6`, `n_steps = 11`, `has_color_row = true` (3 nodes carry `color`).
-- `viewBox_w = 140 + 11 * 112 + 28 = 1400`. ✓ matches rendered SVG.
-- `legend_h = 100`, `viewBox_h = 36 + 6 * 80 + 100 = 616`. ✓
-- Lane y_top = [36, 116, 196, 276, 356, 436]; lane mid = [76, 156, 236, 316, 396, 476]. ✓
-- Step cx = [198, 310, 422, 534, 646, 758, 870, 982, 1094, 1208, 1320] (the 8-px content-area gutter shifts every value by 8 from `140 + j*112 + 50`). ✓
-- Node 4 (HQ Review): step=3, lane="SVY" (k=3) → x = 534-50 = 484, y = 276+8 = 284. ✓
-- Node 5 (Error Checks): step=4, lane="IT" (k=1) → x = 646-50 = 596, y = 116+8 = 124. ✓
-- Node 10 (Public Release): step=9, lane="CMM" (k=5) → x = 1208-50 = 1158, y = 436+8 = 444. ✓ *(Rendered uses x=1156 — 2-px tolerance from chip-width rounding on the step "10" label.)*
-
-The two coord drifts on the rightmost two nodes (chip width=20 for two-digit step numbers shifts the chip but not the node center math) are an artifact of the existing hand-tuned example, not a formula failure — a fresh generation from this YAML would produce x=1158 and the diagram would be visually indistinguishable from the shipped version.
+- `viewBox_w = 140 + 11 * 112 + 28 = 1400`.
+- `legend_h = 100`, `viewBox_h = 36 + 6 * 80 + 100 = 616`.
+- Lane y_top = [36, 116, 196, 276, 356, 436]; lane mid = [76, 156, 236, 316, 396, 476].
+- Step cx = [198, 310, 422, 534, 646, 758, 870, 982, 1094, 1208, 1320] (the 8-px content-area gutter shifts every value by 8 from `140 + j*112 + 50`).
+- Node 4 (HQ Review): step=3, lane="SVY" (k=3) → x = 534-50 = 484, y = 276+8 = 284.
+- Node 5 (Error Checks): step=4, lane="IT" (k=1) → x = 646-50 = 596, y = 116+8 = 124.
+- Node 10 (Public Release): step=9, lane="CMM" (k=5) → x = 1208-50 = 1158, y = 436+8 = 444.
 
 ### 12.2 Adapting this YAML to a different process
 
@@ -490,6 +488,4 @@ Everything else — viewBox sizing, chip positions, legend layout, dark-mode tok
 - `assets/example-process.html` — minimal light (quarterly survey: 11 steps, 6 divisions, data-type chips). Gallery default.
 - `assets/example-process-dark.html` — same, dark skin.
 - `assets/example-process-full.html` — same, editorial-card frame.
-- `assets/example-process-extended.html` — exercises §4 color override: Build app in slate-blue (data quality), Train enumerators in rust-red (governance), Publish results in olive-green (data products). Focal accent on Pilot test step + node unchanged.
-- `assets/example-process-extended-dark.html` — extended pattern, dark skin.
-- `assets/example-process-extended-full.html` — extended pattern, editorial-card frame.
+- Extended variant (6 lanes × 11 steps, §4 color override on 3 nodes) — fully specified by the §12 YAML; no HTML file ships for it, generate it from that spec.

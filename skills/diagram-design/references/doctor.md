@@ -13,8 +13,15 @@ Use two diagnostic modes:
 - **Installed-skill mode** (default): check the runtime and the resolved skill
   installation. Do not require maintainer-only repository files.
 - **Maintainer-checkout mode**: use this only when the resolved installation
-  root contains `CONTRIBUTING.md`, `.github/workflows/ci.yml`, and
-  `scripts/verify-plugin-package.py`. Add the repository integrity checks below.
+  root contains `plugin.json` and `skills/diagram-design/SKILL.md` — i.e., it
+  is a checkout of this repository rather than an installed skill. Add the
+  repository integrity checks below.
+  Note: the repository-level gate scripts referenced by older docs
+  (`verify-geometry.py`, `verify-motion.py`, `lint-skin.py`,
+  `verify-drawio-import.py`, `verify-mermaid-import.py`, `verify-docs-sync.py`,
+  `verify-plugin-package.py`, `test-verify-*.py`) are **not shipped in this
+  repository**. Never require them; `scripts/self_check.py` is the only shipped
+  verifier.
 
 ## Inputs
 
@@ -42,16 +49,19 @@ Run all checks in this order and report each as `pass`, `warn`, or `fail`.
   - `pip install playwright && playwright install chromium`
 - Never auto-install dependencies.
 
-3. Expected script presence (maintainer-checkout mode only)
-- Verify these repository scripts exist:
-  - `scripts/verify-drawio-import.py`
-  - `scripts/verify-mermaid-import.py`
-  - `scripts/verify-motion.py`
-  - `scripts/lint-skin.py`
-  - `scripts/verify-docs-sync.py`
-- Missing scripts are `fail` in maintainer-checkout mode.
-- In installed-skill mode, report that maintainer scripts are not applicable;
-  their absence is not a warning or failure.
+3. Shipped script presence
+- Verify the scripts that ship with the skill exist beneath the resolved skill
+  directory (`skills/diagram-design/` in a maintainer checkout, the skill root
+  when installed):
+  - `scripts/self_check.py`
+  - `scripts/drawio_extract.py`
+  - `scripts/mermaid_extract.py`
+  - `scripts/fixtures/sample-flowchart.mmd`
+  - `scripts/fixtures/sample-architecture.drawio`
+- Missing shipped files are `fail`.
+- The repository-level gate scripts (`verify-*.py`, `lint-skin.py`) are not
+  shipped in this distribution; do not look for them and do not warn about
+  their absence.
 
 4. Plugin wiring surfaces (maintainer-checkout mode only)
 - Verify Claude command files exist and point to their references:
@@ -90,7 +100,7 @@ Always print:
 2. A checklist with one line per check:
 - `[PASS] Python 3.11.9 found at ...`
 - `[WARN] Playwright not installed ...`
-- `[FAIL] Missing scripts/verify-docs-sync.py`
+- `[FAIL] Missing scripts/self_check.py`
 
 3. A `Next actions` section only when warn/fail exists.
 
@@ -110,7 +120,7 @@ Always print:
 Doctor summary: WARN (6 pass, 2 warn, 0 fail)
 [PASS] Python 3.11.9 found at /usr/bin/python3
 [WARN] Playwright package not found in active interpreter
-[PASS] scripts/verify-drawio-import.py present
+[PASS] scripts/self_check.py present (shipped verifier)
 ...
 
 Next actions
