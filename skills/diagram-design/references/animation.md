@@ -118,7 +118,7 @@ Run the shipped self-check:
 python3 scripts/self_check.py path/to/animated-diagram.html
 ```
 
-`self_check.py` is the only verifier shipped with the skill; the repository-level gates named in earlier revisions are not part of this distribution. It checks the accessible-SVG contract, exact canonical-controller identity against `assets/template-motion.html`, mode/state declarations, contiguous step counts, motion budgets, decorative accessibility, the full control set, live status placement, and the reduced-motion/print CSS fallbacks. Checks it does not cover — keyboard handling, page-hide pause, bounded static overrides, and immediate final-step stop — are verified manually in the browser list below.
+`self_check.py` and `check_geometry.py` (§6 rule 6 label-mask overlap) are the only verifiers shipped with the skill; the repository-level gates named in earlier revisions are not part of this distribution. It checks the accessible-SVG contract, exact canonical-controller identity against `assets/template-motion.html`, mode/state declarations, contiguous step counts, motion budgets, decorative accessibility, the full control set, live status placement, and the reduced-motion/print CSS fallbacks. Checks it does not cover — keyboard handling, page-hide pause, bounded static overrides, and immediate final-step stop — are verified manually in the browser list below.
 
 Then verify in a browser:
 

@@ -4,7 +4,7 @@
 
 Not for: ranked lists where exact values matter more than proportion (use a **bar chart**), containment or scope relationships with no quantity (use **nested**), or a hierarchy you need to trace parent-to-child (use a **tree**).
 
-> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` is the only shipped verifier.
+> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` and `scripts/check_geometry.py` (§6 rule 6) are the only shipped verifiers.
 
 ## Layout conventions
 

@@ -24,6 +24,7 @@ jobs:
         run: |
           python3 -m py_compile \
             skills/diagram-design/scripts/self_check.py \
+            skills/diagram-design/scripts/check_geometry.py \
             skills/diagram-design/scripts/drawio_extract.py \
             skills/diagram-design/scripts/mermaid_extract.py
 

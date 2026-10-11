@@ -20,8 +20,8 @@ Use two diagnostic modes:
   (`verify-geometry.py`, `verify-motion.py`, `lint-skin.py`,
   `verify-drawio-import.py`, `verify-mermaid-import.py`, `verify-docs-sync.py`,
   `verify-plugin-package.py`, `test-verify-*.py`) are **not shipped in this
-  repository**. Never require them; `scripts/self_check.py` is the only shipped
-  verifier.
+  repository**. Never require them; `scripts/self_check.py` and
+  `scripts/check_geometry.py` are the only shipped verifiers.
 
 ## Inputs
 
@@ -54,6 +54,7 @@ Run all checks in this order and report each as `pass`, `warn`, or `fail`.
   directory (`skills/diagram-design/` in a maintainer checkout, the skill root
   when installed):
   - `scripts/self_check.py`
+  - `scripts/check_geometry.py`
   - `scripts/drawio_extract.py`
   - `scripts/mermaid_extract.py`
   - `scripts/fixtures/sample-flowchart.mmd`
