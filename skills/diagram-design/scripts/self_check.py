@@ -8,10 +8,10 @@ Ships inside the skill so an installed agent can verify its own output:
 Checks the accessible-SVG contract, the single-file safety rules (no remote
 assets beyond the approved Google Fonts stylesheet, no executable attributes,
 no scripts other than the one canonical motion controller), and — when motion
-markup is present — the structural motion contract. This is the only verifier
-shipped with the skill; the repository-level gates referenced by older docs
-(`lint-skin.py`, `verify-motion.py`, `verify-*.py`) are not part of this
-distribution.
+markup is present — the structural motion contract. This and check_geometry.py
+(§6 rule 6 label-mask overlap) are the only verifiers shipped with the skill;
+the repository-level gates referenced by older docs (`lint-skin.py`,
+`verify-motion.py`, `verify-*.py`) are not part of this distribution.
 """
 
 from __future__ import annotations

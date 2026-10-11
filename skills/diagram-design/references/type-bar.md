@@ -2,7 +2,7 @@
 
 **Best for:** comparing discrete quantities across categories or time intervals — sprint velocity, monthly revenue, feature adoption, cohort counts. Use when each category has a single numeric value and the comparison between bars is the primary message — or, in the dumbbell variant below, exactly two values whose difference is the message.
 
-> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` is the only shipped verifier.
+> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` and `scripts/check_geometry.py` (§6 rule 6) are the only shipped verifiers.
 
 ## Layout conventions
 

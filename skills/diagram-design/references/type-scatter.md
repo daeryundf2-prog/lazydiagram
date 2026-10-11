@@ -2,7 +2,7 @@
 
 **Best for:** correlation and distribution — two continuous variables plotted against each other. Use when the relationship (or lack of one) between variables is the message, or when you need to identify clusters, outliers, and high/low performers.
 
-> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` is the only shipped verifier.
+> **Gate names.** `verify-*.py` and `test-verify-*.py` names in this file denote the maintainer gate's executable contract for the rules around them — what a check must enforce. They are not shipped in this distribution; `scripts/self_check.py` and `scripts/check_geometry.py` (§6 rule 6) are the only shipped verifiers.
 
 ## Layout conventions
 
