@@ -17,4 +17,4 @@ Lazy 시리즈의 다이어그램 설계 플러그인 — `lazyothers`에서 분
 
 ## 라이선스
 
-MIT — [`skills/diagram-design/SKILL.md`](skills/diagram-design/SKILL.md) 참조.
+All rights reserved. © 법무법인(유한) 대륜. 무단 사용·복제·배포를 금합니다.

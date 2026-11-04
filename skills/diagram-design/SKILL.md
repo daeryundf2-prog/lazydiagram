@@ -1,7 +1,7 @@
 ---
 name: diagram-design
 description: Create branded architecture, IT current-state, flowchart, sequence, state machine, ER/data model, timeline, swimlane, quadrant, radar/spider, polar chart (polar/radial lollipop), loop/flywheel, nested, tree, org chart, layer stack, Venn, pyramid/funnel, treemap, bar, line, Gantt and scatter charts, high-level, process, medallion, data flow, DP integration, DP security matrix, Sankey, fishbone, Wardley map, kanban, user journey, deployment, dependency graph, UML class, story map, or database schema diagrams as standalone HTML/SVG/PNG. Redraw .drawio/.drawio.png/.drawio.svg or Mermaid .mmd sources at a chosen size/detail; onboard brand tokens from a website; add semantic patterns, callouts, accessible motion, or sketchy/hand-drawn styling. 한국어 트리거: 다이어그램, 아키텍처 다이어그램, 플로우차트, 시퀀스 다이어그램, ER 다이어그램, 타임라인, 스윔레인, 사분면, 레이더 차트, 생키, 워들리 맵, 칸반, 피시본, 간트 차트, 벤 다이어그램, 트리맵, 다이어그램 디자인, 도식화.
-license: MIT
+license: Proprietary
 metadata:
   version: "2.6"
 ---
