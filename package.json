@@ -7,7 +7,7 @@
     "name": "daeryundf2-prog",
     "url": "https://github.com/daeryundf2-prog"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "check": "npm test"
