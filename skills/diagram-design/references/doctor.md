@@ -22,6 +22,8 @@ Use two diagnostic modes:
   `verify-plugin-package.py`, `test-verify-*.py`) are **not shipped in this
   repository**. Never require them; `scripts/self_check.py` is the only shipped
   verifier.
+  For exit-code and error-code meanings and the three-pass repair cap used when a
+  render check fails, see [`render-lint.md`](render-lint.md).
 
 ## Inputs
 

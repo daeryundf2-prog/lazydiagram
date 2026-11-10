@@ -1,0 +1,15 @@
+lazydiagram third-party notices
+
+hypercore - https://github.com/alpoxdev/hypercore (pinned 2d305cbf5db72e337189aa584b363bb9ced2d9bc)
+MIT License, Copyright (c) 2026 alpoxdev
+
+skills/diagram-design/references/render-lint.md adapts the idea of an exit-code and
+error-code table with a three-pass repair cap from hypercore's hyper-diagram
+render-and-verify rules. The text is rewritten for this repository; no hypercore
+code is included.
+
+Permission notice (MIT): Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation files, to deal in the
+software without restriction, subject to the inclusion of the above copyright notice
+and this permission notice in all copies or substantial portions of the software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
